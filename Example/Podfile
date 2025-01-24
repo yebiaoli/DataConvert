@@ -1,0 +1,13 @@
+use_frameworks!
+
+platform :ios, '10.0'
+
+target 'DataConvert_Example' do
+  pod 'DataConvert', :path => '../'
+
+  target 'DataConvert_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
