@@ -67,9 +67,51 @@ class Tests: XCTestCase {
         //-----------------------
         let tem = UInt16.ctCombine(byte1: 1, byte0: 2)
         print("tem:\(tem)")
-        let temData = Data.ctJoin(bytes:tem.bytes)
+        let temData = Data.ctJoin(bytes:tem.ctBytes)
         print("temData:\(temData.debugDescription)")
         
+
+//        let ff = UInt32(0xff)
+//        print("0xff -> uint32:\(ff)")
+//        
+//        let color1 = (0xFF << 24) | (0 << 16) | (0 << 8) | 0
+//        print("color1:\(color1)")
+        
+        let color = UInt32.ctCombine(byte3: 0xff, byte2: 1, byte1: 1, byte0: 1)
+        print("color:\(color)")
+        
+        let kelvin = UInt16.ctCombine(byte1: 1, byte0: 2)
+        print("kelvin:\(kelvin)")
+        
+        let rgb = 0xaabbcc
+        let result = rgb.ctUInt32.ctSplit
+        let r = result.byte2
+        let g = result.byte1
+        let b = result.byte0
+        print("r:\(r) g:\(g) b:\(b)")
+        
+        let kResult = kelvin.ctSplit
+        let high = kResult.byte1
+        let low = kResult.byte0
+        print("high:\(high) low:\(low)")
+        
+        print("1 << 7 : \(1.ctUInt16.ctLeftShift(15))")
+        print("\(0xa3.ctUInt16.ctGet(startAt: 0, length: 7))")
+        
+        print("Int.max: \(Int.max)")
+        print("Int.min: \(Int.min)")
+        
+        print("UInt8.max: \(UInt8.max)")
+        print("UInt8.min: \(UInt8.min)")
+        
+        print("UInt16.max: \(UInt16.max)")
+        print("UInt16.min: \(UInt16.min)")
+        
+        print("UInt32.max: \(UInt32.max)")
+        print("UInt32.min: \(UInt32.min)")
+        
+        print("UInt64.max: \(UInt64.max)")
+        print("UInt64.min: \(UInt64.min)")
     }
     
     func testPerformanceExample() {
