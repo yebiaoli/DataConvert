@@ -46,6 +46,7 @@ extension UInt8 {
         
     public func ctLeftShift(_ position:UInt8) -> UInt8 {
         guard position >= 0 && position < 8 else {
+            print("Warning: Index out of range. Must be between 0 and 7.")
             assert(false,"Index out of range. Must be between 0 and 7.")
             return self
         }
@@ -53,6 +54,7 @@ extension UInt8 {
     }
     public func ctRightShift(_ position:UInt8) -> UInt8 {
         guard position >= 0 && position < 8 else {
+            print("Warning: Index out of range. Must be between 0 and 7.")
             assert(false,"Index out of range. Must be between 0 and 7.")
             return self
         }
@@ -61,6 +63,7 @@ extension UInt8 {
     
     public func ctSet(bit:CTBit, at index:Int) -> UInt8 {
         guard index >= 0 && index < 8 else {
+            print("Warning: Index out of range. Must be between 0 and 7.")
             assert(false,"Index out of range. Must be between 0 and 7.")
             return self
         }
@@ -73,17 +76,19 @@ extension UInt8 {
         }
     }
     
-    public func ctGetBit(at index:Int) -> UInt8 {
+    public func ctGetBit(at index:Int) -> Bool {
         guard index >= 0 && index < 8 else {
+            print("Warning: Index out of range. Must be between 0 and 7.")
             assert(false,"Index out of range. Must be between 0 and 7.")
-            return 0
+            return false
         }
         let mask = UInt8(1) << index
-        return (self & mask) != 0 ? 1 : 0
+        return (self & mask) != 0
     }
     
     public func ctGet(startAt startIndex: Int, length n: Int) -> UInt8 {
         guard startIndex >= 0 && startIndex < 8 && n > 0 && startIndex + n <= 8 else {
+            print("Warning: Invalid index or bit count. Ensure index is between 0 and 7, and that index + count does not exceed 8.")
             assert(false,"Invalid index or bit count. Ensure index is between 0 and 7, and that index + count does not exceed 8.")
             return 0
         }
@@ -96,6 +101,7 @@ extension UInt8 {
 extension UInt16 {
     public func ctLeftShift(_ position:UInt8) -> UInt16 {
         guard position >= 0 && position < 16 else {
+            print("Warning: Index out of range. Must be between 0 and 15.")
             assert(false,"Index out of range. Must be between 0 and 15.")
             return self
         }
@@ -103,6 +109,7 @@ extension UInt16 {
     }
     public func ctRightShift(_ position:UInt8) -> UInt16 {
         guard position >= 0 && position < 16 else {
+            print("Warning: Index out of range. Must be between 0 and 15.")
             assert(false,"Index out of range. Must be between 0 and 15.")
             return self
         }
@@ -110,6 +117,7 @@ extension UInt16 {
     }
     public func ctSet(bit:CTBit, at index:Int) -> UInt16 {
         guard index >= 0 && index < 16 else {
+            print("Warning: Index out of range. Must be between 0 and 15.")
             assert(false,"Index out of range. Must be between 0 and 15.")
             return self
         }
@@ -121,16 +129,17 @@ extension UInt16 {
             return self & mask
         }
     }
-    public func ctGetBit(at index:Int) -> UInt8 {
+    public func ctGetBit(at index:Int) -> Bool {
         guard index >= 0 && index < 16 else {
+            print("Warning: Index out of range. Must be between 0 and 15.")
             assert(false,"Index out of range. Must be between 0 and 15.")
-            return 0
         }
         let mask = UInt16(1) << index
-        return (self & mask) != 0 ? 1 : 0
+        return (self & mask) != 0
     }
     public func ctGet(startAt startIndex: Int, length n: Int) -> UInt16 {
         guard startIndex >= 0 && startIndex < 16 && n > 0 && startIndex + n <= 16 else {
+            print("Warning: Invalid index or bit count. Ensure index is between 0 and 15, and that index + count does not exceed 16.")
             assert(false,"Invalid index or bit count. Ensure index is between 0 and 15, and that index + count does not exceed 16.")
             return 0
         }
@@ -159,6 +168,7 @@ extension UInt16 {
 extension UInt32 {
     public func ctLeftShift(_ position:UInt8) -> UInt32 {
         guard position >= 0 && position < 32 else {
+            print("Warning: Index out of range. Must be between 0 and 31.")
             assert(false,"Index out of range. Must be between 0 and 31.")
             return self
         }
@@ -166,6 +176,7 @@ extension UInt32 {
     }
     public func ctRightShift(_ position:UInt8) -> UInt32 {
         guard position >= 0 && position < 32 else {
+            print("Warning: Index out of range. Must be between 0 and 31.")
             assert(false,"Index out of range. Must be between 0 and 31.")
             return self
         }
@@ -173,6 +184,7 @@ extension UInt32 {
     }
     public func ctSet(bit:CTBit, at index:Int) -> UInt32 {
         guard index >= 0 && index < 32 else {
+            print("Warning: Index out of range. Must be between 0 and 31.")
             assert(false,"Index out of range. Must be between 0 and 31.")
             return self
         }
@@ -184,16 +196,18 @@ extension UInt32 {
             return self & mask
         }
     }
-    public func ctGetBit(at index:Int) -> UInt8 {
+    public func ctGetBit(at index:Int) -> Bool {
         guard index >= 0 && index < 32 else {
+            print("Warning: Index out of range. Must be between 0 and 31.")
             assert(false,"Index out of range. Must be between 0 and 31.")
-            return 0
+            return false
         }
         let mask = UInt32(1) << index
-        return (self & mask) != 0 ? 1 : 0
+        return (self & mask) != 0
     }
     public func ctGet(startAt startIndex: Int, length n: Int) -> UInt32 {
         guard startIndex >= 0 && startIndex < 32 && n > 0 && startIndex + n <= 32 else {
+            print("Warning: Invalid index or bit count. Ensure index is between 0 and 31, and that index + count does not exceed 32.")
             assert(false,"Invalid index or bit count. Ensure index is between 0 and 31, and that index + count does not exceed 32.")
             return 0
         }
@@ -224,10 +238,10 @@ extension UInt32 {
 
 extension Data {
     public static func ctJoin(_ byte:UInt8) -> Data {
-        Data().ctJoin(byte)
+        Data([byte])
     }
     public static func ctJoin(bytes:[UInt8]) -> Data {
-        Data().ctJoin(bytes: bytes)
+        Data(bytes)
     }
     
     public func ctJoin(_ byte:UInt8) -> Data {
